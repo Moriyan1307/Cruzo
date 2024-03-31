@@ -1,6 +1,8 @@
 import { Box } from "@mui/material";
 import React from "react";
-import { hrPad, vrPad } from "@/Utils/styleUtils";
+import { hrPad, theme, vrPad } from "@/Utils/styleUtils";
+import Header from "../Header/Header";
+import RideLog from "../RIdeLog/RideLog";
 
 function dashboard() {
   return (
@@ -10,9 +12,11 @@ function dashboard() {
         ...vrPad,
         height: "100vh",
         width: "100vw",
+        backgroundColor: theme.primary,
       }}
     >
-      <Box sx={{ border: "2px solid #000" }}>RIdeShare</Box>
+      <Header />
+      <RideLog />
     </Box>
   );
 }
