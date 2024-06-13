@@ -1,6 +1,6 @@
 import { Box, colors } from "@mui/material";
 import React from "react";
-import { theme } from "../../utils/styleUtils";
+import { theme } from "@/utils/styleUtils";
 import AddIcon from "@mui/icons-material/Add";
 import AddDateTab from "../Tabs/AddDateTab";
 import DateCard from "../Cards/DateCard";

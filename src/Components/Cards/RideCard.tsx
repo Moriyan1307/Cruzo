@@ -1,6 +1,6 @@
 import { Box, colors } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { theme } from "../../utils/styleUtils";
+import { theme } from "@/utils/styleUtils";
 import { green } from "@mui/material/colors";
 import PersonIcon from "@mui/icons-material/Person";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";

@@ -1,6 +1,6 @@
 import { Box, colors } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { theme } from "../../utils/styleUtils";
+import { theme } from "@/utils/styleUtils";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { IDateAttributes } from "@/utils/types";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
