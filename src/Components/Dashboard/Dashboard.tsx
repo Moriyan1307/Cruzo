@@ -1,10 +1,12 @@
 import { Box } from "@mui/material";
 import React from "react";
-import { hrPad, theme, vrPad } from "@/Utils/styleUtils";
+import { hrPad, theme, vrPad } from "@/utils/styleUtils";
 import Header from "../Header/Header";
-import RideLog from "../RIdeLog/RideLog";
+import RideLog from "../RideLog/RideLog";
 
-function dashboard() {
+interface Dashboard {}
+
+const Dashboard = ({}: Dashboard) => {
   return (
     <Box
       sx={{
@@ -19,6 +21,6 @@ function dashboard() {
       <RideLog />
     </Box>
   );
-}
+};
 
-export default dashboard;
+export default Dashboard;

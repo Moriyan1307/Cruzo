@@ -1,4 +1,5 @@
 import { colors } from "@mui/material";
+import { green } from "@mui/material/colors";
 
 export const hrPad = {
   px: {
@@ -17,4 +18,7 @@ export const theme = {
   primary: "#0C0A09",
   green: "#22C55E",
   box: "#1c1c1c",
+  innerBox: "#3A3A3A",
+  blue: "#1876D1",
+  white: "#fff",
 };
