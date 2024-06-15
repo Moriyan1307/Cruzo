@@ -1,11 +1,8 @@
 import { Box, Button, colors } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { IDateAttributes } from "@/utils/types";
-import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 
 import { Mont, Roboto, theme } from "@/utils/styleUtils";
-import AddDateTab from "../Tabs/AddDateTab";
+
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import CloseIcon from "@mui/icons-material/Close";

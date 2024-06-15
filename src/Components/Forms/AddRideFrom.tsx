@@ -1,11 +1,5 @@
-import { Box, colors } from "@mui/material";
+import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { IDateAttributes } from "@/utils/types";
-import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
-
-import { Mont, Roboto, theme } from "@/utils/styleUtils";
-import AddDateTab from "../Tabs/AddDateTab";
 
 interface AddRideFrom {}
 

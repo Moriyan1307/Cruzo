@@ -1,10 +1,9 @@
 import { Box, colors } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { theme } from "@/utils/styleUtils";
-import { green } from "@mui/material/colors";
+import { theme } from "../../utils/styleUtils";
 import PersonIcon from "@mui/icons-material/Person";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import { IRideAttributes } from "@/utils/types";
+import { IRideAttributes } from "../../utils/types";
 import { Roboto_Condensed, Montserrat } from "next/font/google";
 
 const Roboto = Roboto_Condensed({

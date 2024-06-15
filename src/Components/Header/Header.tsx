@@ -1,6 +1,5 @@
 import { Box } from "@mui/material";
 import React from "react";
-import { hrPad, vrPad } from "@/utils/styleUtils";
 import logo from "../../../public/logo.png";
 import Image from "next/image";
 import MenuIcon from "@mui/icons-material/Menu";
