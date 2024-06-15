@@ -8,61 +8,9 @@ import AddDateForm from "../Forms/AddDateForm";
 import { getDocs } from "firebase/firestore";
 import { db } from "../../../firebase";
 
-const dateData: IDateAttributes[] = [
-  {
-    date: "3/17",
-    day: "Monday",
-    rideDetails: [
-      {
-        from: "DFW",
-        to: "Liv+",
-        miles: 6,
-        phone: 789,
-        amount: 10,
-        toll: 2,
-      },
-      {
-        from: "Plano",
-        to: "Liv+",
-        miles: 6,
-        phone: 789,
-        amount: 10,
-        toll: 2,
-      },
-    ],
-  },
-  {
-    date: "3/18",
-    day: "Tuesday",
-    rideDetails: [
-      {
-        from: "dfw",
-        to: "Liv+",
-        miles: 6,
-        phone: 789,
-        amount: 10,
-        toll: 2,
-      },
-    ],
-  },
-  {
-    date: "3/19",
-    day: "Wednesday",
-    rideDetails: [
-      {
-        from: "dfw",
-        to: "Liv+",
-        miles: 6,
-        phone: 789,
-        amount: 10,
-        toll: 2,
-      },
-    ],
-  },
-];
 interface RideLog {}
 
-const RideLog = ({}: RideLog) => {
+export default function RideLog() {
   const [showAddDateForm, setShowAddDateFrom] = useState(false);
   const [dateData1, setDateData1] = useState<IDateAttributes[]>([
     { date: "", day: "", rideDetails: [] },
@@ -127,6 +75,4 @@ const RideLog = ({}: RideLog) => {
       })}
     </Box>
   );
-};
-
-export default RideLog;
+}
