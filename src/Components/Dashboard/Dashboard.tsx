@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import React from "react";
 import { hrPad, theme, vrPad } from "../../Utils/styleUtils";
 import Header from "../Header/Header";
-import RideLog from "../RideLog/RideLog";
+import RideLog from "@/components/RideLog/RideLog";
 
 interface Dashboard {}
 
