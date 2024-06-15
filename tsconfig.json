@@ -13,7 +13,7 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@/components/*": ["./src/components/*"],
+      "@/Components/*": ["./src/Components/*"],
       "@/Utils/*": ["./src/Utils/*"],
       "@firebase": ["./firebase"]
     }
