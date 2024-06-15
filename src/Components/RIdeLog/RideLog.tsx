@@ -1,9 +1,8 @@
 import { Box, colors } from "@mui/material";
 import React, { useEffect, useState } from "react";
-
 import AddDateTab from "../Tabs/AddDateTab";
 import DateCard from "../Cards/DateCard";
-import { IDateAttributes } from "../../utils/types/index";
+import { IDateAttributes } from "../../Utils/types/index";
 import { collection, addDoc } from "firebase/firestore";
 import AddDateForm from "../Forms/AddDateForm";
 import { getDocs } from "firebase/firestore";

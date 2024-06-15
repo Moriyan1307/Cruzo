@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Inter, Roboto } from "next/font/google";
 import Dashboard from "@/components/Dashboard/Dashboard";
 import { Box } from "@mui/material";
-import { hrPad, theme, vrPad } from "@/utils/styleUtils";
+import { hrPad, theme, vrPad } from "@/Utils/styleUtils";
 import Header from "@/components/Header/Header";
 import RideLog from "@/components/RideLog/RideLog";
 import Head from "next/head";

@@ -1,10 +1,10 @@
 import { Box, colors } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { IDateAttributes } from "../../utils/types/index";
+import { IDateAttributes } from "../../Utils/types/index";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import RideCard from "./RideCard";
-import { Mont, Roboto, theme } from "../../utils/styleUtils";
+import { Mont, Roboto, theme } from "../../Utils/styleUtils";
 import AddDateTab from "../Tabs/AddDateTab";
 
 interface DateCard {
