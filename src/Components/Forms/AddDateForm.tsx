@@ -4,7 +4,7 @@ import { Mont, Roboto, theme } from "@/Utils/styleUtils";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import CloseIcon from "@mui/icons-material/Close";
-import { db } from "@firebase";
+import { db } from "../../firebase/firebase";
 import { collection, addDoc } from "firebase/firestore";
 
 interface AddDateForm {
