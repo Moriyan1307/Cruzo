@@ -6,6 +6,7 @@ import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import RideCard from "./RideCard";
 import { Mont, Roboto, theme } from "../../Utils/styleUtils";
 import AddDateTab from "../Tabs/AddDateTab";
+import AddRideFrom from "../Forms/AddRideFrom";
 
 interface DateCard {
   dateData: IDateAttributes;
@@ -13,10 +14,15 @@ interface DateCard {
 
 const DateCard = ({ dateData }: DateCard) => {
   const [clickedDrop, setClickedDrop] = useState(false);
+  const [showAddRideForm, setShowAddRideForm] = useState(false);
   console.log(dateData);
 
   const handleClick = () => {
     setClickedDrop(!clickedDrop);
+  };
+
+  const handleDataFromChild = () => {
+    setShowAddRideForm(!showAddRideForm);
   };
 
   let dateTab = (
@@ -137,7 +143,6 @@ const DateCard = ({ dateData }: DateCard) => {
                 width: "45%",
                 borderRadius: "10px",
                 marginTop: "10px",
-
                 backgroundColor: theme.box,
                 display: "flex",
               }}
@@ -147,7 +152,13 @@ const DateCard = ({ dateData }: DateCard) => {
             </Box>
           </Box>
 
-          <AddDateTab width="90%" type={"Add Ride"} />
+          <Box onClick={() => setShowAddRideForm(!showAddRideForm)}>
+            <AddDateTab width="90%" type={"Add Ride"} />
+          </Box>
+
+          {showAddRideForm && (
+            <AddRideFrom handleFormClick={handleDataFromChild} />
+          )}
 
           {dateData.rideDetails.length > 0 ? (
             dateData.rideDetails.map((res, index) => (

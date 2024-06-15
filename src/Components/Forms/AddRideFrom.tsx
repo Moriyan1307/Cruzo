@@ -1,24 +1,263 @@
-import { Box } from "@mui/material";
-import React, { useEffect, useState } from "react";
+// import { Box, Button } from "@mui/material";
+// import React, { useEffect, useState } from "react";
+// import CloseIcon from "@mui/icons-material/Close";
+// import { collection, addDoc } from "firebase/firestore";
+// import { db } from "../../../firebase";
+// import { theme } from "@/Utils/styleUtils";
 
-interface AddRideFrom {}
+// interface AddRideFrom {
+//   handleFormClick: () => void;
+// }
 
-const AddRideFrom = ({}: AddRideFrom) => {
-  const [clickedDrop, setClickedDrop] = useState(false);
+// const AddRideFrom = ({ handleFormClick }: AddRideFrom) => {
+//   const sendDataToParent = () => {
+//     handleFormClick();
+//   };
 
-  const handleClick = () => {
-    setClickedDrop(!clickedDrop);
-  };
+//   return (
+//     <Box
+//       sx={{
+//         position: "absolute",
+//         height: "100%",
+//         width: "95%",
+//         margin: "auto",
+//         transform: "translate(-50%,-50%)",
+//         top: "50%",
+//         left: "50%",
+//         background: "rgb(0,0,0,0.5)",
+//         display: "flex",
+//         color: theme.white,
+//         fontSize: theme.fontSize,
+//       }}
+//     >
+//       <Box
+//         sx={{
+//           height: "40%",
+//           width: "100%",
+
+//           margin: "auto",
+//           background: theme.box,
+//           borderRadius: "15px",
+//           display: "flex",
+//           flexDirection: "column",
+//         }}
+//       >
+//         <Box
+//           sx={{
+//             height: "50%",
+
+//             width: "100%",
+//           }}
+//         >
+//           <CloseIcon
+//             sx={{ fontSize: 30, margin: "20px" }}
+//             onClick={sendDataToParent}
+//           />
+//           <p style={{ marginTop: "20px", marginLeft: "25%" }}> Select Date :</p>
+//         </Box>
+//         <Box sx={{ margin: "auto", color: "#000", padding: "20px" }}></Box>
+//         <Button sx={{ margin: "auto", width: "40%" }}>OK</Button>
+//       </Box>
+//     </Box>
+//   );
+// };
+
+// export default AddRideFrom;
+
+import { Box, Button, TextField, Typography } from "@mui/material";
+import React, { useState } from "react";
+import CloseIcon from "@mui/icons-material/Close";
+// import { theme } from "@/Utils/styleUtils"; // Adjust the path as needed
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme({
+  palette: {
+    mode: "dark", // Dark mode
+    primary: {
+      main: "#bb86fc", // A soft purple, good for dark themes
+    },
+    secondary: {
+      main: "#03dac6", // A teal that contrasts well with dark backgrounds
+    },
+    error: {
+      main: "#cf6679", // Error red, should be easily visible
+    },
+    background: {
+      default: "#121212", // Deep gray, typical for dark mode
+      paper: "#242424",
+    },
+    text: {
+      primary: "#ffffff", // Bright enough for readability
+      secondary: "#e0e0e0", // Slightly dimmer for less crucial text elements
+    },
+  },
+  typography: {
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    fontSize: 14, // Base font size
+    h1: {
+      fontSize: "2.125rem", // 34px
+      fontWeight: 500,
+    },
+    h2: {
+      fontSize: "1.75rem", // 28px
+      fontWeight: 500,
+    },
+    body1: {
+      fontSize: "1rem", // 16px
+    },
+    button: {
+      textTransform: "none", // Buttons with normal casing
+    },
+  },
+  spacing: 8, // Default spacing multiplier
+  shape: {
+    borderRadius: 4, // Reduced border radius for a sharper look
+  },
+});
+
+interface AddRideFormProps {
+  handleFormClick: () => void;
+}
+
+const AddRideForm = ({ handleFormClick }: AddRideFormProps) => {
+  // State for each input field
+  const [amount, setAmount] = useState<number>(0);
+  const [from, setFrom] = useState<string>("");
+  const [to, setTo] = useState<string>("");
+  const [toll, setToll] = useState<number>(0);
+  const [phone, setPhone] = useState<number>(0);
+  const [miles, setMiles] = useState<number>(0);
 
   return (
-    <Box
-      sx={{
-        height: "100%",
-        width: "100%",
-        border: "1px solid #ffff",
-      }}
-    ></Box>
+    <ThemeProvider theme={theme}>
+      <Box
+        sx={{
+          position: "absolute",
+
+          height: "100%",
+          width: "95%",
+          margin: "auto",
+          transform: "translate(-50%, -50%)",
+          top: "50%",
+          left: "50%",
+          background: "rgba(0, 0, 0, 0.5)",
+          display: "flex",
+          flexDirection: "column",
+          padding: theme.spacing(2),
+          // borderRadius: theme.shape.borderRadius
+          color: theme.palette.common.white,
+        }}
+      >
+        <Box
+          sx={{
+            margin: "auto",
+            width: { xs: "100%", sm: "85%" },
+            background: theme.palette.background.paper,
+            borderRadius: theme.shape.borderRadius,
+            padding: theme.spacing(2),
+          }}
+        >
+          <Typography variant="h6" sx={{ textAlign: "center" }}>
+            Add Ride Details
+          </Typography>
+          <TextField
+            label="From"
+            variant="outlined"
+            fullWidth
+            value={from}
+            onChange={(e) => setFrom(e.target.value)}
+            sx={{ marginY: theme.spacing(2) }}
+          />
+          <TextField
+            label="To"
+            variant="outlined"
+            fullWidth
+            value={to}
+            onChange={(e) => setTo(e.target.value)}
+            sx={{ marginBottom: theme.spacing(2) }}
+          />
+          <TextField
+            label="Amount"
+            type="number"
+            variant="outlined"
+            fullWidth
+            value={amount}
+            onChange={(e) => setAmount(parseFloat(e.target.value))}
+            sx={{ marginBottom: theme.spacing(2) }}
+          />
+          <TextField
+            label="Toll"
+            type="number"
+            variant="outlined"
+            fullWidth
+            value={toll}
+            onChange={(e) => setToll(parseFloat(e.target.value))}
+            sx={{ marginBottom: theme.spacing(2) }}
+          />
+          <TextField
+            label="Phone"
+            type="number"
+            variant="outlined"
+            fullWidth
+            value={phone}
+            onChange={(e) => setPhone(parseInt(e.target.value, 10))}
+            sx={{ marginBottom: theme.spacing(2) }}
+          />
+          <TextField
+            label="Miles"
+            type="number"
+            variant="outlined"
+            fullWidth
+            value={miles}
+            onChange={(e) => setMiles(parseFloat(e.target.value))}
+            sx={{ marginBottom: theme.spacing(2) }}
+          />
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              margin: "20px",
+            }}
+          >
+            <Button
+              sx={{
+                margin: "auto",
+                width: { xs: "40%", sm: "30%" },
+                height: { xs: "50px", sm: "40px" },
+                color: "white",
+                backgroundColor: "black",
+                border: "0.5px solid #e0e0e0",
+                "&:hover": {
+                  backgroundColor: "red",
+                },
+              }}
+              onClick={handleFormClick}
+              startIcon={<CloseIcon />}
+            >
+              Cancel
+            </Button>
+            <Button
+              sx={{
+                margin: "auto",
+                width: { xs: "40%", sm: "30%" },
+                height: { xs: "50px", sm: "40px" },
+                border: "0.5px solid #e0e0e0",
+                color: "white",
+                backgroundColor: "black",
+
+                "&:hover": {
+                  backgroundColor: "green",
+                },
+              }}
+              onClick={() => {}}
+            >
+              Save
+            </Button>
+          </Box>
+        </Box>
+      </Box>
+    </ThemeProvider>
   );
 };
 
-export default AddRideFrom;
+export default AddRideForm;
