@@ -8,9 +8,9 @@ import AddDateForm from "../Forms/AddDateForm";
 import { getDocs } from "firebase/firestore";
 import { db } from "../../../firebase";
 
-interface RideLog {}
+interface RideLogMain {}
 
-export default function RideLog() {
+export default function RideLogMain() {
   const [showAddDateForm, setShowAddDateFrom] = useState(false);
   const [dateData1, setDateData1] = useState<IDateAttributes[]>([
     { date: "", day: "", rideDetails: [] },

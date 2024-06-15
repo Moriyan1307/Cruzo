@@ -4,7 +4,7 @@ import Dashboard from "@/components/Dashboard/Dashboard";
 import { Box } from "@mui/material";
 import { hrPad, theme, vrPad } from "@/Utils/styleUtils";
 import Header from "@/components/Header/Header";
-import RideLog from "@/components/RideLog/RideLog";
+import RideLog from "@/components/RideLogMain/RideLog";
 import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
