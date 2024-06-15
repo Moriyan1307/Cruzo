@@ -5,19 +5,20 @@ import AddIcon from "@mui/icons-material/Add";
 
 interface AddDateTab {
   type: string;
+  width: string;
 }
 
-const AddDateTab = ({ type }: AddDateTab) => {
+const AddDateTab = ({ type, width }: AddDateTab) => {
   return (
     <Box
       sx={{
-        height: "10%",
+        height: "80px",
         backgroundColor: theme.box,
         borderRadius: "10px",
         display: "flex",
         margin: "auto",
         marginTop: "10px",
-        width: { xs: "95%", sm: "95%" },
+        width: `${width}`,
       }}
     >
       <Box

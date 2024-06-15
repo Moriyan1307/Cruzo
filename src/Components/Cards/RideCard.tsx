@@ -28,6 +28,7 @@ const RideCard = ({ rideDetails }: RideCard) => {
 
   return (
     <Box
+      className={Mont.className}
       sx={{
         height: "150px",
         width: "95%",
@@ -35,7 +36,7 @@ const RideCard = ({ rideDetails }: RideCard) => {
         marginTop: "20px",
         borderRadius: "15px",
         backgroundColor: theme.box,
-        border: `1px solid ${theme.green}`,
+        border: `0.5px solid ${theme.green}`,
         display: "flex",
         flexDirection: "column",
         color: theme.white,
@@ -45,7 +46,7 @@ const RideCard = ({ rideDetails }: RideCard) => {
       <Box
         sx={{
           height: "50%",
-          border: "0.5px solid #fff",
+
           width: "100%",
           display: "flex",
           justifyContent: "space-between",
@@ -55,7 +56,7 @@ const RideCard = ({ rideDetails }: RideCard) => {
           sx={{
             height: "100%",
             width: "32%",
-            border: "0.5px solid #fff",
+
             display: "flex",
           }}
         >
@@ -65,7 +66,7 @@ const RideCard = ({ rideDetails }: RideCard) => {
           sx={{
             height: "100%",
             width: "32%",
-            border: "0.5px solid #fff",
+
             display: "flex",
           }}
         >
@@ -80,7 +81,7 @@ const RideCard = ({ rideDetails }: RideCard) => {
           sx={{
             height: "100%",
             width: "32%",
-            border: "0.5px solid #fff",
+
             display: "flex",
           }}
         >
@@ -90,7 +91,7 @@ const RideCard = ({ rideDetails }: RideCard) => {
       <Box
         sx={{
           height: "50%",
-          border: "0.5px solid #fff",
+
           width: "100%",
           display: "flex",
           justifyContent: "space-between",
@@ -98,14 +99,42 @@ const RideCard = ({ rideDetails }: RideCard) => {
       >
         {" "}
         <Box
-          sx={{ height: "100%", width: "32%", border: "0.5px solid #fff" }}
-        ></Box>
+          sx={{
+            height: "100%",
+            width: "32%",
+
+            display: "flex",
+          }}
+        >
+          <Box
+            sx={{
+              margin: "auto",
+              display: "flex",
+              justifyContent: "space-around",
+            }}
+          >
+            <PersonIcon sx={{ fontSize: 35 }} /> <p>{" ."} 2</p>
+          </Box>
+        </Box>
         <Box
-          sx={{ height: "100%", width: "32%", border: "0.5px solid #fff" }}
-        ></Box>
-        <Box
-          sx={{ height: "100%", width: "32%", border: "0.5px solid #fff" }}
-        ></Box>
+          sx={{
+            height: "100%",
+            width: "32%",
+
+            display: "flex",
+          }}
+        >
+          <Box
+            sx={{
+              margin: "auto",
+              display: "flex",
+            }}
+          >
+            {"$ "}
+            {rideDetails.amount}
+          </Box>
+        </Box>
+        <Box sx={{ height: "100%", width: "32%" }}></Box>
       </Box>
     </Box>
   );

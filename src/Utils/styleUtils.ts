@@ -1,5 +1,4 @@
-import { colors } from "@mui/material";
-import { green } from "@mui/material/colors";
+import { Roboto_Condensed, Montserrat } from "next/font/google";
 
 export const hrPad = {
   px: {
@@ -21,4 +20,17 @@ export const theme = {
   innerBox: "#3A3A3A",
   blue: "#1876D1",
   white: "#fff",
+  fontSize: "25px",
+  fontSecondery: "20px",
 };
+
+export const Roboto = Roboto_Condensed({
+  weight: ["300"],
+  subsets: ["latin"],
+  style: ["normal"],
+});
+export const Mont = Montserrat({
+  weight: ["400"],
+  subsets: ["latin"],
+  style: ["normal"],
+});

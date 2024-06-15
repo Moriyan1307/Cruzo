@@ -1,10 +1,13 @@
 import { Box, colors } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { theme } from "@/utils/styleUtils";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { IDateAttributes } from "@/utils/types";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 import RideCard from "./RideCard";
+import { Mont, Roboto, theme } from "@/utils/styleUtils";
+import AddDateTab from "../Tabs/AddDateTab";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../../firebase";
 
 interface DateCard {
   dateData: IDateAttributes;
@@ -12,12 +15,11 @@ interface DateCard {
 
 const DateCard = ({ dateData }: DateCard) => {
   const [clickedDrop, setClickedDrop] = useState(false);
+  console.log(dateData);
 
   const handleClick = () => {
     setClickedDrop(!clickedDrop);
   };
-
-  console.log(dateData);
 
   let dateTab = (
     <Box
@@ -29,21 +31,26 @@ const DateCard = ({ dateData }: DateCard) => {
         borderRadius: "15px",
         backgroundColor: theme.box,
         display: "flex",
+        color: theme.white,
       }}
       onClick={handleClick}
+      className={Roboto.className}
     >
       <Box
         sx={{
           height: "100%",
           width: "70%",
+
           color: "white",
           display: "flex",
+          justifyContent: "space-evenly",
         }}
       >
         <Box
           sx={{
             fontSize: "27px",
             margin: "auto",
+            width: "30%",
           }}
         >
           {dateData.date}
@@ -69,7 +76,7 @@ const DateCard = ({ dateData }: DateCard) => {
           sx={{
             height: "45px",
             width: "45px",
-            border: "0.5px solid #fff",
+            border: "1px solid #fff",
             display: "flex",
             margin: "auto",
             borderRadius: "50%",
@@ -95,14 +102,69 @@ const DateCard = ({ dateData }: DateCard) => {
         <Box
           sx={{
             height: "auto",
-            border: "0.5px solid #fff",
+            color: theme.white,
+            fontSize: theme.fontSecondery,
           }}
+          className={Mont.className}
         >
           {dateTab}
 
-          {dateData.rideDetails.map((res, index) => {
-            return <RideCard key={index} rideDetails={res} />;
-          })}
+          <Box
+            sx={{
+              height: "60px",
+
+              width: "95%",
+              margin: "auto",
+              display: "flex",
+              justifyContent: "space-around",
+              marginBottom: "25px",
+            }}
+          >
+            <Box
+              sx={{
+                height: "100%",
+                width: "45%",
+                borderRadius: "10px",
+                marginTop: "10px",
+
+                backgroundColor: theme.box,
+                display: "flex",
+              }}
+            >
+              <Box sx={{ margin: "auto" }}>Upcoming</Box>
+            </Box>
+            <Box
+              sx={{
+                height: "100%",
+                width: "45%",
+                borderRadius: "10px",
+                marginTop: "10px",
+
+                backgroundColor: theme.box,
+                display: "flex",
+              }}
+            >
+              {" "}
+              <Box sx={{ margin: "auto" }}>Completed</Box>
+            </Box>
+          </Box>
+
+          <AddDateTab width="90%" type={"Add Ride"} />
+
+          {dateData.rideDetails.length > 0 ? (
+            dateData.rideDetails.map((res, index) => (
+              <RideCard key={index} rideDetails={res} />
+            ))
+          ) : (
+            <Box sx={{ display: "flex", height: "20vh" }}>
+              <Box sx={{ margin: "auto" }}>
+                {" "}
+                No Rides Added!
+                <br />
+                Please Add Ride To Get Started
+              </Box>
+            </Box>
+          )}
         </Box>
       ) : (
         dateTab
