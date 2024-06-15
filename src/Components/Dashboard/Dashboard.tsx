@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import React from "react";
 import { hrPad, theme, vrPad } from "../../Utils/styleUtils";
-import RideLog from "@/components/RideLogMain/RideLogMain";
+import RideLog from "../Tabs/RideLogMain";
 
 import Header from "../Header/Header";
 
