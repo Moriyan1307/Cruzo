@@ -12,4 +12,5 @@ export interface IRideAttributes {
   miles: number;
   toll: number;
   phone: number;
+  time: string;
 }

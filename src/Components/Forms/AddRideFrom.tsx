@@ -70,6 +70,10 @@ import CloseIcon from "@mui/icons-material/Close";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../../../firebase";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+import dayjs, { Dayjs } from "dayjs";
 
 const theme = createTheme({
   palette: {
@@ -129,6 +133,7 @@ const AddRideForm = ({ handleFormClick, id }: AddRideFormProps) => {
   const [toll, setToll] = useState<number>(0);
   const [phone, setPhone] = useState<number>(0);
   const [miles, setMiles] = useState<number>(0);
+  const [time, setTime] = React.useState<Dayjs | null>(dayjs());
 
   console.log(id);
 
@@ -144,6 +149,7 @@ const AddRideForm = ({ handleFormClick, id }: AddRideFormProps) => {
           phone: phone,
           toll: toll,
           miles: miles,
+          time: time?.toDate(),
         }),
       });
       console.log("Ride details updated successfully");
@@ -152,6 +158,8 @@ const AddRideForm = ({ handleFormClick, id }: AddRideFormProps) => {
     }
     handleFormClick();
   };
+
+  console.log(time?.toDate());
 
   return (
     <ThemeProvider theme={theme}>
@@ -237,6 +245,14 @@ const AddRideForm = ({ handleFormClick, id }: AddRideFormProps) => {
             onChange={(e) => setMiles(parseFloat(e.target.value))}
             sx={{ marginBottom: theme.spacing(2) }}
           />
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <TimePicker
+              value={time}
+              onChange={(newTime) => setTime(newTime)}
+              label="Basic time picker"
+            />
+          </LocalizationProvider>
+
           <Box
             sx={{
               display: "flex",
