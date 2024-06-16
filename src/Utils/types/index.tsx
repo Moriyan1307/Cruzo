@@ -1,4 +1,5 @@
 export interface IDateAttributes {
+  id: string;
   date: string;
   day: string;
   rideDetails: IRideAttributes[];

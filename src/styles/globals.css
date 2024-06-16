@@ -3,15 +3,3 @@
 @tailwind utilities;
 
 /* In your global CSS file */
-.datePicker .react-datepicker {
-  background-color: #333333;
-  color: #ffffff;
-}
-.datePicker .react-datepicker__header {
-  background-color: #bb86fc;
-}
-.datePicker .react-datepicker__day-name,
-.datePicker .react-datepicker__day,
-.datePicker .react-datepicker__time-name {
-  color: #e0e0e0;
-}

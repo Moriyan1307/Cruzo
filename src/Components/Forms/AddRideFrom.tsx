@@ -67,8 +67,9 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
-// import { theme } from "@/Utils/styleUtils"; // Adjust the path as needed
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { doc, updateDoc, arrayUnion } from "firebase/firestore";
+import { db } from "../../../firebase";
 
 const theme = createTheme({
   palette: {
@@ -117,9 +118,10 @@ const theme = createTheme({
 
 interface AddRideFormProps {
   handleFormClick: () => void;
+  id: string;
 }
 
-const AddRideForm = ({ handleFormClick }: AddRideFormProps) => {
+const AddRideForm = ({ handleFormClick, id }: AddRideFormProps) => {
   // State for each input field
   const [amount, setAmount] = useState<number>(0);
   const [from, setFrom] = useState<string>("");
@@ -127,6 +129,29 @@ const AddRideForm = ({ handleFormClick }: AddRideFormProps) => {
   const [toll, setToll] = useState<number>(0);
   const [phone, setPhone] = useState<number>(0);
   const [miles, setMiles] = useState<number>(0);
+
+  console.log(id);
+
+  const handleSubmit = async () => {
+    const docRef = doc(db, "dateData", id);
+
+    try {
+      await updateDoc(docRef, {
+        rideDetails: arrayUnion({
+          amount: amount,
+          from: from,
+          to: to,
+          phone: phone,
+          toll: toll,
+          miles: miles,
+        }),
+      });
+      console.log("Ride details updated successfully");
+    } catch (error) {
+      console.error("Error updating document: ", error);
+    }
+    handleFormClick();
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -249,7 +274,7 @@ const AddRideForm = ({ handleFormClick }: AddRideFormProps) => {
                   backgroundColor: "green",
                 },
               }}
-              onClick={() => {}}
+              onClick={handleSubmit}
             >
               Save
             </Button>

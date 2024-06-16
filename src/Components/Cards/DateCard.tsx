@@ -15,7 +15,6 @@ interface DateCard {
 const DateCard = ({ dateData }: DateCard) => {
   const [clickedDrop, setClickedDrop] = useState(false);
   const [showAddRideForm, setShowAddRideForm] = useState(false);
-  console.log(dateData);
 
   const handleClick = () => {
     setClickedDrop(!clickedDrop);
@@ -24,6 +23,8 @@ const DateCard = ({ dateData }: DateCard) => {
   const handleDataFromChild = () => {
     setShowAddRideForm(!showAddRideForm);
   };
+
+  useEffect(() => {}, [dateData]);
 
   let dateTab = (
     <Box
@@ -157,7 +158,10 @@ const DateCard = ({ dateData }: DateCard) => {
           </Box>
 
           {showAddRideForm && (
-            <AddRideFrom handleFormClick={handleDataFromChild} />
+            <AddRideFrom
+              handleFormClick={handleDataFromChild}
+              id={dateData.id}
+            />
           )}
 
           {dateData.rideDetails.length > 0 ? (

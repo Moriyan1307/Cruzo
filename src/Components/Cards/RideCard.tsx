@@ -5,6 +5,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import { IRideAttributes } from "../../Utils/types";
 import { Roboto_Condensed, Montserrat } from "next/font/google";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
 const Roboto = Roboto_Condensed({
   weight: ["300"],

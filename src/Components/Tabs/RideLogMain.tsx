@@ -3,54 +3,84 @@ import React, { useEffect, useState } from "react";
 import AddDateTab from "./AddDateTab";
 import DateCard from "../Cards/DateCard";
 import { IDateAttributes } from "../../Utils/types/index";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, onSnapshot } from "firebase/firestore";
 import AddDateForm from "../Forms/AddDateForm";
 import { getDocs } from "firebase/firestore";
 import { db } from "../../../firebase";
+import { newDate } from "react-datepicker/dist/date_utils";
 
 interface RideLogMain {}
 
 export default function RideLogMain() {
   const [showAddDateForm, setShowAddDateFrom] = useState(false);
   const [dateData1, setDateData1] = useState<IDateAttributes[]>([
-    { date: "", day: "", rideDetails: [] },
+    { id: "", date: "", day: "", rideDetails: [] },
   ]);
+
+  const newData: IDateAttributes[] = []; // Prepare an array to collect new data
 
   const handleDataFromChild = () => {
     setShowAddDateFrom(false);
   };
 
-  const fetchDateData = async () => {
-    const querySnapshot = await getDocs(collection(db, "dateData"));
+  // const fetchDateData = async () => {
+  //   const querySnapshot = await getDocs(collection(db, "dateData"));
+  //   const newData = querySnapshot.docs.map((doc) => {
+  //     const data = doc.data();
+  //     const seconds = data.date?.seconds;
+  //     const date = new Date(seconds * 1000);
+  //     const readableDate = date.toLocaleString("en-US", {
+  //       month: "short",
+  //       day: "numeric",
+  //       hour12: true,
+  //     });
 
-    const newData: IDateAttributes[] = []; // Prepare an array to collect new data
+  //     return {
+  //       id: doc.id,
+  //       date: readableDate,
+  //       day: data.day,
+  //       rideDetails: data.rideDetails,
+  //     };
+  //   });
 
-    querySnapshot.forEach((doc) => {
-      const seconds = doc.data().date?.seconds;
-      const day = doc.data().day;
-      const rideDetails = doc.data().rideDetails;
+  //   // Directly update state with the mapped data
+  //   setDateData1(newData);
+  // };
 
-      const date = new Date(seconds * 1000);
-
-      const readableDate = date.toLocaleString("en-US", {
-        month: "short",
-        day: "numeric",
-        hour12: true, // Use 12-hour format with AM/PM
-      });
-      console.log(doc.data());
-
-      newData.push({
-        date: readableDate,
-        day: day, // Assuming 'day' is also stored in the document
-        rideDetails: rideDetails,
-      });
-    });
-
-    setDateData1(newData);
-  };
+  // useEffect(() => {
+  //   fetchDateData();
+  // }, [dateData1]);
 
   useEffect(() => {
-    fetchDateData(); // Call the async function
+    const unsub = onSnapshot(
+      collection(db, "dateData"),
+      (querySnapshot) => {
+        const newData = querySnapshot.docs.map((doc) => {
+          const data = doc.data();
+          const seconds = data.date?.seconds;
+          const date = new Date(seconds * 1000);
+          const readableDate = date.toLocaleString("en-US", {
+            month: "short",
+            day: "numeric",
+            hour12: true,
+          });
+
+          return {
+            id: doc.id,
+            date: readableDate,
+            day: data.day,
+            rideDetails: data.rideDetails,
+          };
+        });
+
+        setDateData1(newData);
+      },
+      (error) => {
+        console.error("Error fetching real-time data:", error);
+      }
+    );
+
+    return () => unsub();
   }, []);
 
   return (

@@ -1,25 +1,18 @@
-import { Box, Button, colors } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { Mont, Roboto, theme } from "@/Utils/styleUtils";
+import { Box, Button, IconButton, Typography } from "@mui/material";
+import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import CloseIcon from "@mui/icons-material/Close";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../../firebase";
+import { theme } from "@/Utils/styleUtils";
 
-interface AddDateForm {
+interface AddDateFormProps {
   handleFormClick: () => void;
 }
 
-const AddDateForm = ({ handleFormClick }: AddDateForm) => {
-  const [clickedDrop, setClickedDrop] = useState(false);
-
-  const handleClick = () => {
-    setClickedDrop(!clickedDrop);
-  };
-
+const AddDateForm: React.FC<AddDateFormProps> = ({ handleFormClick }) => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
-  console.log(selectedDate?.getDay());
 
   const handleDateChange = (date: Date | null) => {
     setSelectedDate(date);
@@ -58,62 +51,94 @@ const AddDateForm = ({ handleFormClick }: AddDateForm) => {
     }
     handleFormClick();
   };
-
-  const sendDataToParent = () => {
-    handleFormClick();
-  };
-
   return (
     <Box
       sx={{
-        position: "absolute",
-        height: "100%",
-        width: "95%",
-        margin: "auto",
-        transform: "translate(-50%,-50%)",
-        top: "50%",
-        left: "50%",
-        background: "rgb(0,0,0,0.5)",
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100vw",
+        height: "100vh",
         display: "flex",
-        color: theme.white,
-        fontSize: theme.fontSize,
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "rgba(0,0,0,0.8)",
       }}
     >
       <Box
         sx={{
-          height: "40%",
-          width: "100%",
-
-          margin: "auto",
-          background: theme.box,
-          borderRadius: "15px",
+          width: "90%",
+          maxWidth: "500px",
+          bgcolor: theme.box,
+          borderRadius: "16px",
+          padding: 4,
+          boxShadow: 24,
           display: "flex",
           flexDirection: "column",
+          alignItems: "center",
         }}
       >
+        <IconButton
+          onClick={handleFormClick}
+          sx={{ alignSelf: "flex-end", color: "white" }}
+        >
+          <CloseIcon />
+        </IconButton>
+        <Typography variant="h5" sx={{ color: "white", marginBottom: 2 }}>
+          Select Date
+        </Typography>
+        <DatePicker
+          selected={selectedDate}
+          onChange={handleDateChange}
+          dateFormat="MM/dd/yyyy"
+          inline
+        />
+
         <Box
           sx={{
-            height: "50%",
-
-            width: "100%",
+            display: "flex",
+            justifyContent: "space-between",
+            margin: "20px",
+            width: "80%",
           }}
         >
-          <CloseIcon
-            sx={{ fontSize: 30, margin: "20px" }}
-            onClick={sendDataToParent}
-          />
-          <p style={{ marginTop: "20px", marginLeft: "25%" }}> Select Date :</p>
+          {" "}
+          <Button
+            sx={{
+              margin: "auto",
+              width: { xs: "40%", sm: "30%" },
+              height: { xs: "40px", sm: "40px" },
+              color: "white",
+              backgroundColor: "black",
+              border: "0.5px solid #e0e0e0",
+              "&:hover": {
+                backgroundColor: "red",
+              },
+            }}
+            onClick={handleFormClick}
+            startIcon={<CloseIcon />}
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={handleSubmit}
+            variant="contained"
+            sx={{
+              margin: "auto",
+              width: { xs: "40%", sm: "30%" },
+              height: { xs: "40px", sm: "40px" },
+              border: "0.5px solid #e0e0e0",
+              color: "white",
+              backgroundColor: "black",
+
+              "&:hover": {
+                backgroundColor: "green",
+              },
+            }}
+          >
+            Confirm
+          </Button>
         </Box>
-        <Box sx={{ margin: "auto", color: "#000", padding: "20px" }}>
-          <DatePicker
-            selected={selectedDate}
-            dateFormat="MM/dd/yyyy"
-            onChange={handleDateChange}
-          />
-        </Box>
-        <Button onClick={handleSubmit} sx={{ margin: "auto", width: "40%" }}>
-          OK
-        </Button>
       </Box>
     </Box>
   );
