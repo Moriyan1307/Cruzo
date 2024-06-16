@@ -1,3 +1,4 @@
+import { Timestamp } from "firebase/firestore";
 export interface IDateAttributes {
   id: string;
   date: string;
@@ -12,5 +13,5 @@ export interface IRideAttributes {
   miles: number;
   toll: number;
   phone: number;
-  time: string;
+  time: Timestamp;
 }

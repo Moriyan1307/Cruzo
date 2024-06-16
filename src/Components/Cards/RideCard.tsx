@@ -25,10 +25,9 @@ interface RideCard {
 }
 
 const RideCard = ({ rideDetails }: RideCard) => {
-  const timestamp = rideDetails?.time;
-  const date = timestamp?.toDate();
+  const timestamp = rideDetails.time;
+  const date = timestamp.toDate();
   const time = dayjs(date).format("h:mm A");
-  console.log(time);
 
   return (
     <>
