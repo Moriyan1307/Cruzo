@@ -190,68 +190,77 @@ const AddRideForm = ({ handleFormClick, id }: AddRideFormProps) => {
             padding: theme.spacing(2),
           }}
         >
-          <Typography variant="h6" sx={{ textAlign: "center" }}>
+          <Typography
+            variant="h6"
+            sx={{ textAlign: "center", marginBottom: "20px" }}
+          >
             Add Ride Details
           </Typography>
-          <TextField
-            label="From"
-            variant="outlined"
-            fullWidth
-            value={from}
-            onChange={(e) => setFrom(e.target.value)}
-            sx={{ marginY: theme.spacing(2) }}
-          />
-          <TextField
-            label="To"
-            variant="outlined"
-            fullWidth
-            value={to}
-            onChange={(e) => setTo(e.target.value)}
-            sx={{ marginBottom: theme.spacing(2) }}
-          />
-          <TextField
-            label="Amount"
-            type="number"
-            variant="outlined"
-            fullWidth
-            value={amount}
-            onChange={(e) => setAmount(parseFloat(e.target.value))}
-            sx={{ marginBottom: theme.spacing(2) }}
-          />
-          <TextField
-            label="Toll"
-            type="number"
-            variant="outlined"
-            fullWidth
-            value={toll}
-            onChange={(e) => setToll(parseFloat(e.target.value))}
-            sx={{ marginBottom: theme.spacing(2) }}
-          />
-          <TextField
-            label="Phone"
-            type="number"
-            variant="outlined"
-            fullWidth
-            value={phone}
-            onChange={(e) => setPhone(parseInt(e.target.value, 10))}
-            sx={{ marginBottom: theme.spacing(2) }}
-          />
-          <TextField
-            label="Miles"
-            type="number"
-            variant="outlined"
-            fullWidth
-            value={miles}
-            onChange={(e) => setMiles(parseFloat(e.target.value))}
-            sx={{ marginBottom: theme.spacing(2) }}
-          />
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <TextField
+              label="From"
+              variant="outlined"
+              value={from}
+              onChange={(e) => setFrom(e.target.value)}
+              sx={{ marginBottom: theme.spacing(2), width: "48%" }}
+            />
+            <TextField
+              label="To"
+              variant="outlined"
+              value={to}
+              onChange={(e) => setTo(e.target.value)}
+              sx={{ marginBottom: theme.spacing(2), width: "48%" }}
+            />
+          </Box>
+
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <TextField
+              label="Amount"
+              type="number"
+              variant="outlined"
+              value={amount}
+              onChange={(e) => setAmount(parseFloat(e.target.value))}
+              sx={{ marginBottom: theme.spacing(2), width: "48%" }}
+            />
+
+            <TextField
+              label="Miles"
+              type="number"
+              variant="outlined"
+              value={miles}
+              onChange={(e) => setMiles(parseFloat(e.target.value))}
+              sx={{ marginBottom: theme.spacing(2), width: "48%" }}
+            />
+          </Box>
+
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <TimePicker
               value={time}
               onChange={(newTime) => setTime(newTime)}
-              label="Basic time picker"
+              label="Ride Time"
+              sx={{ marginBottom: theme.spacing(2), width: "100%" }}
             />
           </LocalizationProvider>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <TextField
+              label="Toll"
+              type="number"
+              variant="outlined"
+              fullWidth
+              value={toll}
+              onChange={(e) => setToll(parseFloat(e.target.value))}
+              sx={{ marginBottom: theme.spacing(2), width: "48%" }}
+            />
+            <TextField
+              label="Phone"
+              type="number"
+              variant="outlined"
+              fullWidth
+              value={phone}
+              onChange={(e) => setPhone(parseInt(e.target.value, 10))}
+              sx={{ marginBottom: theme.spacing(2), width: "48%" }}
+            />
+          </Box>
 
           <Box
             sx={{
