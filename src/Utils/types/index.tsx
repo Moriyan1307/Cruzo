@@ -1,4 +1,6 @@
 import { Timestamp } from "firebase/firestore";
+import dayjs, { Dayjs } from "dayjs";
+
 export interface IDateAttributes {
   id: string;
   date: string;
@@ -14,4 +16,5 @@ export interface IRideAttributes {
   toll: number;
   phone: number;
   time: Timestamp;
+  name: string;
 }

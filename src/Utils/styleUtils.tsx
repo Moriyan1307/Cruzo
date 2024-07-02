@@ -21,7 +21,7 @@ export const theme = {
   blue: "#1876D1",
   white: "#fff",
   fontSize: "25px",
-  fontSecondery: "20px",
+  fontSecondary: "20px",
 };
 
 export const Roboto = Roboto_Condensed({

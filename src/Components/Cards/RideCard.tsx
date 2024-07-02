@@ -7,7 +7,8 @@ import { IRideAttributes } from "../../Utils/types";
 import { Roboto_Condensed, Montserrat } from "next/font/google";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import dayjs from "dayjs";
-import { Timestamp } from "firebase/firestore";
+import EditIcon from "@mui/icons-material/Edit";
+import AddRideFrom from "../Forms/AddRideFrom";
 
 const Roboto = Roboto_Condensed({
   weight: ["300"],
@@ -22,15 +23,33 @@ const Mont = Montserrat({
 
 interface RideCard {
   rideDetails: IRideAttributes;
+  id: string;
 }
 
-const RideCard = ({ rideDetails }: RideCard) => {
+const RideCard = ({ rideDetails, id }: RideCard) => {
   const timestamp = rideDetails.time;
   const date = timestamp.toDate();
   const time = dayjs(date).format("h:mm A");
 
+  const [showAddRideForm, setShowAddRideForm] = useState(false);
+
+  const handleDataFromChild = () => {
+    setShowAddRideForm(!showAddRideForm);
+  };
+
+  console.log(rideDetails);
+
   return (
     <>
+      {showAddRideForm && (
+        <AddRideFrom
+          handleFormClick={handleDataFromChild}
+          id={id}
+          type="EDIT"
+          rideDetails={rideDetails}
+        />
+      )}
+
       <Box
         sx={{
           width: "90%",
@@ -38,12 +57,20 @@ const RideCard = ({ rideDetails }: RideCard) => {
           marginTop: "20px",
           display: "flex",
           color: theme.white,
+          justifyContent: "space-between",
         }}
       >
-        <AccessTimeIcon sx={{ fontSize: 28, margin: "0", padding: "0" }} />
-        <Typography sx={{ fontSize: theme.fontSecondery, marginLeft: "10px" }}>
-          {time}
+        <Typography sx={{ fontSize: theme.fontSecondary }}>
+          {rideDetails.name}
         </Typography>
+        <Box sx={{ display: "flex" }}>
+          <AccessTimeIcon sx={{ fontSize: 28, margin: "0", padding: "0" }} />
+          <Typography
+            sx={{ fontSize: theme.fontSecondary, marginLeft: "10px" }}
+          >
+            {time}
+          </Typography>
+        </Box>
       </Box>
 
       <Box
@@ -153,7 +180,26 @@ const RideCard = ({ rideDetails }: RideCard) => {
               {rideDetails.amount}
             </Box>
           </Box>
-          <Box sx={{ height: "100%", width: "32%" }}></Box>
+          <Box sx={{ height: "100%", width: "32%", display: "flex" }}>
+            <Box
+              onClick={() => setShowAddRideForm(!showAddRideForm)}
+              sx={{
+                margin: "auto",
+                display: "flex",
+                justifyContent: "space-around",
+                //border: "1px solid #fff",
+                width: "80%",
+                borderRadius: "10px",
+                background: "#2b2b2b",
+                boxShadow: "-3px -3px 4px #121212, 1px 1px 1px #444444",
+              }}
+            >
+              <EditIcon sx={{ fontSize: 35, margin: "5px" }} />{" "}
+              {/* <Typography sx={{ fontSize: theme.fontSecondary }}>
+                Edit
+              </Typography> */}
+            </Box>
+          </Box>
         </Box>
       </Box>
     </>

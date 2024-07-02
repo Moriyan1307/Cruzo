@@ -65,15 +65,16 @@
 // export default AddRideFrom;
 
 import { Box, Button, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { doc, updateDoc, arrayUnion } from "firebase/firestore";
+import { doc, updateDoc, arrayUnion, Timestamp } from "firebase/firestore";
 import { db } from "../../../firebase";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import dayjs, { Dayjs } from "dayjs";
+import { IRideAttributes } from "@/Utils/types";
 
 const theme = createTheme({
   palette: {
@@ -123,19 +124,38 @@ const theme = createTheme({
 interface AddRideFormProps {
   handleFormClick: () => void;
   id: string;
+  type?: string;
+  rideDetails: IRideAttributes;
 }
 
-const AddRideForm = ({ handleFormClick, id }: AddRideFormProps) => {
+const AddRideForm = ({
+  handleFormClick,
+  id,
+  type,
+  rideDetails,
+}: AddRideFormProps) => {
   // State for each input field
-  const [amount, setAmount] = useState<number>(0);
+  const [amount, setAmount] = useState<number | undefined>(0);
   const [from, setFrom] = useState<string>("");
+  const [name, setName] = useState<string | undefined>("");
   const [to, setTo] = useState<string>("");
   const [toll, setToll] = useState<number>(0);
   const [phone, setPhone] = useState<number>(0);
   const [miles, setMiles] = useState<number>(0);
-  const [time, setTime] = React.useState<Dayjs | null>(dayjs());
+  const [time, setTime] = useState<Dayjs | null>(dayjs());
 
-  console.log(id);
+  useEffect(() => {
+    if (type === "EDIT") {
+      setName(rideDetails.name);
+      setFrom(rideDetails.from);
+      setTo(rideDetails.to);
+      setToll(rideDetails.toll);
+      setAmount(rideDetails.amount);
+      setMiles(rideDetails.miles);
+      setPhone(rideDetails.phone);
+      setTime(dayjs((rideDetails.time as Timestamp).toDate()));
+    }
+  }, []);
 
   const handleSubmit = async () => {
     const docRef = doc(db, "dateData", id);
@@ -149,7 +169,8 @@ const AddRideForm = ({ handleFormClick, id }: AddRideFormProps) => {
           phone: phone,
           toll: toll,
           miles: miles,
-          time: time?.toDate(),
+          time: time ? Timestamp.fromDate(time.toDate()) : null,
+          name: name,
         }),
       });
       console.log("Ride details updated successfully");
@@ -194,8 +215,17 @@ const AddRideForm = ({ handleFormClick, id }: AddRideFormProps) => {
             variant="h6"
             sx={{ textAlign: "center", marginBottom: "20px" }}
           >
-            Add Ride Details
+            {type == "ADD" ? <>Add Ride Details</> : <>Edit Ride Details</>}
           </Typography>
+
+          <TextField
+            label="Name"
+            variant="outlined"
+            fullWidth
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            sx={{ marginBottom: theme.spacing(2), width: "100%" }}
+          />
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <TextField
               label="From"

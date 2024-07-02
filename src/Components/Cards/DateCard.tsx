@@ -108,7 +108,7 @@ const DateCard = ({ dateData }: DateCard) => {
           sx={{
             height: "auto",
             color: theme.white,
-            fontSize: theme.fontSecondery,
+            fontSize: theme.fontSecondary,
           }}
           className={Mont.className}
         >
@@ -161,12 +161,14 @@ const DateCard = ({ dateData }: DateCard) => {
             <AddRideFrom
               handleFormClick={handleDataFromChild}
               id={dateData.id}
+              type="ADD"
+              rideDetails={dateData.rideDetails[0]}
             />
           )}
 
           {dateData.rideDetails.length > 0 ? (
             dateData.rideDetails.map((res, index) => (
-              <RideCard key={index} rideDetails={res} />
+              <RideCard key={index} rideDetails={res} id={dateData.id} />
             ))
           ) : (
             <Box sx={{ display: "flex", height: "20vh" }}>
