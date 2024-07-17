@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 import AddDateTab from "./AddDateTab";
 import DateCard from "../Cards/DateCard";
 import { IDateAttributes } from "../../Utils/types/index";
-import { collection, addDoc, onSnapshot } from "firebase/firestore";
+
 import AddDateForm from "../Forms/AddDateForm";
 import { getDocs } from "firebase/firestore";
 import { db } from "../../../firebase";
 import { newDate } from "react-datepicker/dist/date_utils";
+import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
 
 interface RideLogMain {}
 
@@ -23,37 +24,12 @@ export default function RideLogMain() {
     setShowAddDateFrom(false);
   };
 
-  // const fetchDateData = async () => {
-  //   const querySnapshot = await getDocs(collection(db, "dateData"));
-  //   const newData = querySnapshot.docs.map((doc) => {
-  //     const data = doc.data();
-  //     const seconds = data.date?.seconds;
-  //     const date = new Date(seconds * 1000);
-  //     const readableDate = date.toLocaleString("en-US", {
-  //       month: "short",
-  //       day: "numeric",
-  //       hour12: true,
-  //     });
-
-  //     return {
-  //       id: doc.id,
-  //       date: readableDate,
-  //       day: data.day,
-  //       rideDetails: data.rideDetails,
-  //     };
-  //   });
-
-  //   // Directly update state with the mapped data
-  //   setDateData1(newData);
-  // };
-
-  // useEffect(() => {
-  //   fetchDateData();
-  // }, [dateData1]);
-
   useEffect(() => {
+    // Create a query with ordering
+    const q = query(collection(db, "dateData"), orderBy("date", "asc"));
+
     const unsub = onSnapshot(
-      collection(db, "dateData"),
+      q,
       (querySnapshot) => {
         const newData = querySnapshot.docs.map((doc) => {
           const data = doc.data();
@@ -100,7 +76,6 @@ export default function RideLogMain() {
       {showAddDateForm && <AddDateForm handleFormClick={handleDataFromChild} />}
 
       {dateData1.map((res, index) => {
-        console.log(res);
         return <DateCard key={index} dateData={res} />;
       })}
     </Box>
